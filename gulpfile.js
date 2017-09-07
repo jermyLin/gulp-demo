@@ -2,7 +2,7 @@
 var gulp = require('gulp'), //本地安装gulp所用到的地方
     less = require('gulp-less');
     autoprefixer = require('gulp-autoprefixer');
-    sass = require('gulp-sass')
+    sass = require('gulp-ruby-sass')
 
 //定义一个testLess任务（自定义任务名称）
 gulp.task('testLess', function () {
@@ -17,12 +17,12 @@ gulp.task('testLess', function () {
         }))
         .pipe(gulp.dest('src/css')); //将会在src/css下生成index.css
 });
-gulp.task('testSass',function () {
-    gulp.src('src/less/index.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('src/css'));
-})
-gulp.task('default',['testLess','testSass']); //定义默认任务 elseTask为其他任务，该示例没有定义elseTask任务
+gulp.task('sass', () =>
+sass('src/scss/index.scss')
+    .on('error', sass.logError)
+    .pipe(gulp.dest('src/css'))
+);
+gulp.task('default',['testLess','sass']); //定义默认任务 elseTask为其他任务，该示例没有定义elseTask任务
 
 //gulp.task(name[, deps], fn) 定义任务  name：任务名称 deps：依赖任务名称 fn：回调函数
 //gulp.src(globs[, options]) 执行任务处理的文件  globs：处理的文件路径(字符串或者字符串数组)
