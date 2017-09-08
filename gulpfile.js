@@ -1,14 +1,14 @@
 //导入工具包 require('node_modules里对应模块')
 var gulp = require('gulp'), //本地安装gulp所用到的地方
-    less = require('gulp-less');
-    autoprefixer = require('gulp-autoprefixer');
-    sass = require('gulp-ruby-sass')
+    less = require('gulp-less'),
+    autoPrefixer = require('gulp-autoprefixer'),
+    sass = require('gulp-ruby-sass');
 
 //定义一个testLess任务（自定义任务名称）
 gulp.task('testLess', function () {
     gulp.src('src/less/index.less') //该任务针对的文件
         .pipe(less()) //该任务调用的模块
-        .pipe(autoprefixer({
+        .pipe(autoPrefixer({
             browsers: ['last 2 versions', 'Android >= 4.0'],
             cascade: true, //是否美化属性值 默认：true 像这样：
             //-webkit-transform: rotate(45deg);
